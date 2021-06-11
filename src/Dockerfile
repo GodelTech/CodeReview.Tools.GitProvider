@@ -4,14 +4,15 @@ ENV GIT_ACCESS_TOKEN=""
 ENV GIT_REPOSITORY_URL=""
 ENV GIT_BRANCH="master"
 ENV GIT_ASKPASS=/root/git-askpass
+ENV GIT_USE_BASIC_AUTH_SCHEME=""
 
 VOLUME /src
 WORKDIR /src
 
-RUN apk update
-RUN apk add git
+ADD ./run.sh /
 
-RUN echo 'echo $GIT_ACCESS_TOKEN' > /root/git-askpass
-RUN chmod 777 /root/git-askpass
+RUN apk update && apk add git && apk add dos2unix
 
-CMD git clone $GIT_REPOSITORY_URL /src && git switch $GIT_BRANCH
+RUN dos2unix /run.sh
+
+CMD /run.sh
