@@ -14,6 +14,5 @@ ADD ./run.sh /
 RUN apk update && apk add git && apk add dos2unix
 
 RUN dos2unix /run.sh
-RUN echo 'echo $GIT_ACCESS_TOKEN' > /root/git-askpass && chmod 777 /root/git-askpass
 
 CMD /run.sh
