@@ -14,5 +14,6 @@ ADD ./run.sh /
 RUN apk update && apk add git && apk add dos2unix
 
 RUN dos2unix /run.sh
+RUN chmod +x /run.sh
 
 CMD /run.sh
